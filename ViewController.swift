@@ -20,7 +20,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var textLabel: UILabel!
     
     
-    let wikipediaURl = "https://en.wikipedia.org/w/api.php"
+    let wikipediaURl = "https://ru.wikipedia.org/w/api.php"
 
 
     
@@ -74,9 +74,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 print(results[0].identifier)
                 let res = results[0].identifier
                 // Пишем каждое слово с большой буквы
-                self.navigationItem.title = res.capitalized
-                self.requestInfo(flowerName: res)
                 
+                let translate = TranslateRU()
+                let trans = translate.translate(input: res)
+                self.requestInfo(flowerName: trans)
+                self.navigationItem.title = trans.capitalized
                 print(res)
             }
             let handler = VNImageRequestHandler(ciImage: image)
